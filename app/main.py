@@ -1,5 +1,5 @@
 from fastapi import FastAPI
-from app.api.endpoints import registration
+from app.api.endpoints import registration, login
 from app.utils.logger import get_logger
 
 logger = get_logger()
@@ -21,3 +21,4 @@ def health_check():
 
 
 app.include_router(registration.router)
+app.include_router(login.router)

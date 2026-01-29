@@ -53,6 +53,7 @@ class Database:
         except Exception as e:
             logger.error(f"Error checking email/contact existence: {e}")
             return True
+
         
     def insert_user_data(self, data: dict):
         """
@@ -83,3 +84,17 @@ class Database:
             logger.error(f"Error inserting user data: {e}")
             return None
 
+    def get_user_by_email(self, email: str):
+        try:
+            with self.conn.cursor() as cursor:
+                query = """
+                    SELECT id,hashed_password
+                    FROM users
+                    WHERE email = %s
+                    LIMIT 1
+                """
+                cursor.execute(query, (email,))
+                return cursor.fetchone()   
+        except Exception as e:
+            logger.error(f"Error fetching user by email: {e}")
+            return None

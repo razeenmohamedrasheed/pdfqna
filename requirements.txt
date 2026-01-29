@@ -5,3 +5,4 @@ python-dotenv
 psycopg2
 passlib[argon2]
 pydantic[email]
+python-jose[cryptography]
