@@ -98,3 +98,22 @@ class Database:
         except Exception as e:
             logger.error(f"Error fetching user by email: {e}")
             return None
+        
+    def list_all_companies(self):
+        try:
+            with self.conn.cursor() as cursor:
+                query = """
+                    SELECT company_name, company_type, industry
+                    FROM companies
+                """
+                cursor.execute(query)
+
+                rows = cursor.fetchall()
+                columns = [desc[0] for desc in cursor.description]
+
+                return [dict(zip(columns, row)) for row in rows]
+
+        except Exception as e:
+            logger.error(f"Error fetching companies: {e}")
+            return []
+
