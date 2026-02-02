@@ -13,7 +13,6 @@ from app.services.authentication import (
 logger = get_logger()
 load_dotenv()
 ACCESS_TOKEN_EXPIRE_MINUTES = int(os.getenv("ACCESS_TOKEN_EXPIRE_MINUTES", 60))
-print("token--------->",type(ACCESS_TOKEN_EXPIRE_MINUTES))
 
 async def user_login(data):
     logger.info("Starting user registration flow")
@@ -36,7 +35,7 @@ async def user_login(data):
             )
         access_token = create_access_token(
                         data={
-                        "sub": id,  
+                        "sub": str(id),  
                         "email": data.email
                     },
                     expires_delta=timedelta(minutes=ACCESS_TOKEN_EXPIRE_MINUTES)

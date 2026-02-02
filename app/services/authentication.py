@@ -37,14 +37,12 @@ def create_access_token(data: dict, expires_delta: timedelta | None = None):
 
 def verify_access_token(token: str):
     try:
-        logger.debug(f"JWT VERIFY SECRET: {SECRET_KEY}")
-        logger.debug(f"TOKEN repr: {repr(token)}")
-        logger.debug(f"TOKEN length: {len(token)}")
         payload = jwt.decode(
             token,
             SECRET_KEY,
             algorithms=[ALGORITHM]
         )
+
         return payload
 
     except JWTError:
@@ -55,10 +53,10 @@ def verify_access_token(token: str):
         )
 
 def get_current_user(token: str = Depends(oauth2_scheme)):
+    print("code reached here phase 1--->")
     payload = verify_access_token(token)
-
     user_id = payload.get("sub")
-
+    print(user_id)
     if not user_id:
         raise HTTPException(
             status_code=status.HTTP_401_UNAUTHORIZED,
