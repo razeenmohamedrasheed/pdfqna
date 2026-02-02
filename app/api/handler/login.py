@@ -36,7 +36,7 @@ async def user_login(data):
             )
         access_token = create_access_token(
                         data={
-                        "sub": id,  
+                        "sub": str(id),  
                         "email": data.email
                     },
                     expires_delta=timedelta(minutes=ACCESS_TOKEN_EXPIRE_MINUTES)
