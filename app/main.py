@@ -1,5 +1,5 @@
 from fastapi import FastAPI
-from app.api.endpoints import registration, login, jobs
+from app.api.endpoints import registration, login, jobs, documents
 from app.utils.logger import get_logger
 
 logger = get_logger()
@@ -23,3 +23,4 @@ def health_check():
 app.include_router(registration.router)
 app.include_router(login.router)
 app.include_router(jobs.router)
+app.include_router(documents.router)
